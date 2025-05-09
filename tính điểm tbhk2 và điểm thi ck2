@@ -1,0 +1,28 @@
+def tinh_diem_trung_binh_nam():
+    dtb_hk1 = float(input("Nhập điểm trung bình học kỳ 1: "))
+    muc_tieu = [6.5, 8.0, 9.0]
+
+    print("\n==> Điểm trung bình học kỳ 2 cần đạt:")
+    for muc in muc_tieu:
+        dtb_hk2_can = ((muc * 3) - dtb_hk1) / 2
+        dtb_hk2_can = round(dtb_hk2_can, 1)
+        print(f"Để đạt ĐTBCN ≥ {muc} thì cần ĐTBHK2 ≥ {dtb_hk2_can}")
+
+    return [round(((muc * 3) - dtb_hk1) / 2, 1) for muc in muc_tieu]
+
+def tinh_diem_cuoi_ky(dtb_hk2_muctieu):
+    diem_tx = list(map(float, input("\nNhập các điểm thường xuyên (cách nhau bởi dấu cách): ").split()))
+    diem_gk = float(input("Nhập điểm giữa kỳ: "))
+    tong_tx = sum(diem_tx)
+    so_luong_tx = len(diem_tx)
+
+    print("\n==> Điểm cuối kỳ cần đạt:")
+    for muc, label in zip(dtb_hk2_muctieu, ["6.5", "8", "9"]):
+        tong_can = muc * (so_luong_tx + 5)
+        diem_ck_can = (tong_can - (tong_tx + 2 * diem_gk)) / 3
+        diem_ck_can = round(diem_ck_can, 1)
+        print(f"Để ĐTBHK2 ≥ {label}, cần điểm cuối kỳ ≥ {diem_ck_can}")
+
+# Chạy chương trình
+dtb_hk2_muctieu = tinh_diem_trung_binh_nam()
+tinh_diem_cuoi_ky(dtb_hk2_muctieu)
